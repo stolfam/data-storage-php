@@ -18,7 +18,6 @@
          */
         public function __construct(string $dir, string $namespace = null, string $prefix = "")
         {
-            $this->dir = $dir;
             $this->prefix = $prefix;
             $this->namespace = $namespace;
 
@@ -32,6 +31,8 @@
                     mkdir($dir);
                 }
             }
+
+            $this->dir = $dir;
         }
 
         public function save(string $key, mixed $data, bool $overwrite = true): bool
