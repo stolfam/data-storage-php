@@ -16,7 +16,7 @@
                 return false;
             }
 
-            $this->data[$key] = $data;
+            $this->data[$key] = serialize($data);
 
             return true;
         }
@@ -24,7 +24,7 @@
         public function load(string $key): mixed
         {
             if (isset($this->data[$key])) {
-                return $this->data[$key];
+                return unserialize($this->data[$key]);
             }
 
             return null;
