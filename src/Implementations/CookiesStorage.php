@@ -8,11 +8,24 @@
 
     class CookiesStorage implements IDataStorage
     {
-        public int $expiration = 5184000;
-        public string $prefix = "";
+        public const DEFAULT_EXPIRATION = 5184000;
+
+        public readonly int $expiration;
+        public readonly string $prefix;
 
         /** @var string[] */
         public array $errors = [];
+
+        /**
+         * @param int    $expiration
+         * @param string $prefix
+         */
+        public function __construct(int $expiration = self::DEFAULT_EXPIRATION, string $prefix = "")
+        {
+            $this->expiration = $expiration;
+            $this->prefix = $prefix;
+        }
+
 
         public function save(string $key, mixed $data, bool $overwrite = true): bool
         {
