@@ -8,9 +8,9 @@
 
     class FileStorage implements IDataStorage
     {
-        public readonly string $dir;
-        public readonly string $prefix;
-        public readonly string $namespace;
+        public string $dir;
+        public string $prefix;
+        public string $namespace;
 
         /**
          * @param string $dir

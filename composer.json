@@ -2,10 +2,10 @@
   "name": "stolfam/data-storage-php",
   "license": "MIT",
   "description": "Super simple interface for data storage written in PHP.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "library",
   "require": {
-    "php": ">= 8.2.0"
+    "php": ">= 8.0.0"
   },
   "require-dev": {
     "nette/tester": "^2.3"
@@ -21,7 +21,7 @@
   "minimum-stability": "stable",
   "config": {
     "platform": {
-      "php": "8.2"
+      "php": "8.0"
     }
   }
 }

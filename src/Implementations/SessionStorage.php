@@ -8,8 +8,8 @@
 
     class SessionStorage implements IDataStorage
     {
-        public readonly string $prefix;
-        public readonly string $namespace;
+        public string $prefix;
+        public string $namespace;
 
         /**
          * @param string $prefix

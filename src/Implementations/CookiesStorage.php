@@ -10,8 +10,8 @@
     {
         public const DEFAULT_EXPIRATION = 5184000;
 
-        public readonly int $expiration;
-        public readonly string $prefix;
+        public int $expiration;
+        public string $prefix;
 
         /** @var string[] */
         public array $errors = [];
