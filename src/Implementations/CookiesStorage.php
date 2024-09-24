@@ -3,6 +3,7 @@
 
     namespace Stolfam\DataStorage\Impl;
 
+    use Stolfam\DataStorage\CipherHelper;
     use Stolfam\DataStorage\IDataStorage;
 
 
@@ -12,6 +13,8 @@
 
         public int $expiration;
         public string $prefix;
+
+        public ?CipherHelper $cipher = null;
 
         /** @var string[] */
         public array $errors = [];
@@ -26,6 +29,10 @@
             $this->prefix = $prefix;
         }
 
+        public function setCipher(CipherHelper $cipher): void
+        {
+            $this->cipher = $cipher;
+        }
 
         public function save(string $key, mixed $data, bool $overwrite = true): bool
         {
@@ -37,6 +44,10 @@
             $data = serialize($data);
             $data = base64_encode($data);
 
+            if ($this->cipher != null) {
+                $data = $this->cipher->crypt($data);
+            }
+
             return setcookie($key, $data, (time() + $this->expiration), "/", ($_SERVER['HTTP_HOST'] ?? ""));
         }
 
@@ -46,7 +57,12 @@
             if (isset($_COOKIE[$key])) {
                 $data = null;
                 try {
-                    $data = base64_decode($_COOKIE[$key]);
+                    $rawData = $_COOKIE[$key];
+                    if ($this->cipher != null) {
+                        $rawData = $this->cipher->decrypt($rawData);
+                    }
+
+                    $data = base64_decode($rawData);
                 } catch (\Throwable $t) {
                     $this->errors[] = $t->getMessage();
 

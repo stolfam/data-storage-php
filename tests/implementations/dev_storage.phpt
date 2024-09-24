@@ -10,6 +10,8 @@
     $falseKey = "key2";
     $data = 12345;
 
+    $storage->setCipher(new \Stolfam\DataStorage\CipherHelper("devtest",1111111111111111));
+
     Assert::same(true, $storage->save($key, $data));
     Assert::same(false, $storage->save($key, $data, false));
     Assert::same($data, $storage->load($key));
